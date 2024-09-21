@@ -1,0 +1,12 @@
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\bin\Debug\net6.0\HBCommon.deps.json
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\bin\Debug\net6.0\HBCommon.dll
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\bin\Debug\net6.0\HBCommon.pdb
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.GeneratedMSBuildEditorConfig.editorconfig
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.AssemblyInfoInputs.cache
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.AssemblyInfo.cs
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.csproj.CoreCompileInputs.cache
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.sourcelink.json
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.dll
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\refint\HBCommon.dll
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\HBCommon.pdb
+E:\Kỳ7\PRN221\hotel-booking-system\HBCommon\obj\Debug\net6.0\ref\HBCommon.dll
