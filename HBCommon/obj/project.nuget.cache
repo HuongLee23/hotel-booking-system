@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "sGv4PVW/9sS7UTgxJjJY/sUDqlU0TsbBhyujv40KoJv+2uc+HXJMpnRw7CMFn90T4uQt1uRv1FQcrTYKFJd9rg==",
+  "success": true,
+  "projectFilePath": "E:\\Kỳ7\\PRN221\\hotel-booking-system\\HBCommon\\HBCommon.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\hello\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\hello\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\hello\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
+  ],
+  "logs": []
+}
