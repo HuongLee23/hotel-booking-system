@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotelBookingSystem", "HotelBookingSystem.csproj", "{69E1AD48-959E-4C03-923B-28BF3917F2A2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotelBookingSystem", "HotelBookingSystem.csproj", "{69E1AD48-959E-4C03-923B-28BF3917F2A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{8EF85769-3495-448A-83FF-7F1B3A045DD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "..\Infrastructure\Infrastructure.csproj", "{8EF85769-3495-448A-83FF-7F1B3A045DD4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HBCommon", "..\HBCommon\HBCommon.csproj", "{28181F0C-57A8-4121-B962-34EEF2746D8B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HBCommon", "..\HBCommon\HBCommon.csproj", "{28181F0C-57A8-4121-B962-34EEF2746D8B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

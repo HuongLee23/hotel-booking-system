@@ -1,7 +1,17 @@
+using HotelBookingSystem.Repositories;
+using HotelBookingSystem.Repositories.Interfaces;
+using Infrastructure.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+
+builder.Services.AddDbContext<Booking_hotelContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("MyDBContext")));
+
+builder.Services.AddTransient<IRoomRepository, RoomRepository>();
 
 var app = builder.Build();
 
