@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HBCommon")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f48cba68ba24bca1a4b8034a93a6596d33231aac")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d586ffeea06f0626e3c81b5a5f21a9e8ae5b817")]
 [assembly: System.Reflection.AssemblyProductAttribute("HBCommon")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HBCommon")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
