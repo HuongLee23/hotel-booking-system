@@ -1,0 +1,52 @@
+﻿@page "/login"
+@model Bookings_Hotel.Pages.Home.LoginModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Pages/Shared/Layout_Login.cshtml";
+}
+
+<div class="container mt-10">
+    <h2 class="text-center mb-4">Login</h2>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card">
+                <div class="card-header text-center">
+                    <h4>Đăng nhập</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post">
+                        <div class="text-danger">
+                            <div asp-validation-summary="All" class="text-danger"></div>
+                        </div>
+                        <!-- Hidden field for ReturnUrl -->
+                        <input type="hidden" asp-for="ReturnUrl" value="@Model.ReturnUrl" />
+                        <div class="mb-3">
+                            <label asp-for="Username" class="form-label">Tài khoản</label>
+                            <input asp-for="Username" class="form-control" />
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label">Mật khẩu</label>
+                            <input asp-for="Password" type="password" class="form-control" />
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Đăng nhập</button>
+                    </form>
+                </div>
+                <div class="card-footer text-center">
+                    <a asp-page="/Home/ForgotPassword">Quên mật khẩu?</a> |
+                    <a asp-page="/Home/Register">Chưa có tài khoản? Đăng ký</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles {
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+}
+
+@section Scripts {
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation/1.19.3/jquery.validate.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.12/jquery.validate.unobtrusive.min.js"></script>
+}

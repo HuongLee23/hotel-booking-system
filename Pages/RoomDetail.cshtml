@@ -1,0 +1,218 @@
+﻿@page
+@model Bookings_Hotel.Pages.RoomDetailModel
+@{
+    ViewData["Title"] = "Room Detail";
+}
+@section Styles {
+     
+    @* @Html.Raw("<link rel=\"stylesheet\" href=\"https://cdn.jsdelivr.net/npm/@splidejs/splide@3.6.9/dist/css/splide.min.css\">") *@
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@@splidejs/splide@3.6.9/dist/css/splide.min.css">
+    <link rel="stylesheet" href="~/template/css/room-detail.css">
+}
+<!-- Room Detail -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="d-flex align-items-center justify-content-center">
+                        <div class="thumbnail_slider w-100">
+                            <!-- Primary Slider Start-->
+                            <div id="primary_slider" class="splide">
+                                <div class="splide__track">
+                                    <ul class="splide__list">
+                                        @foreach (var imageUrl in Model.typeRoomDTOGet.LstImage)
+                                        {
+                                            <li class="splide__slide">
+                                                <img src="@imageUrl" alt="Image">
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Primary Slider End-->
+                            <!-- Thumbnail Slider Start-->
+                            <div id="thumbnail_slider" class="splide" style="position:relative;top:120px;">
+                                <div class="splide__track">
+                                    <ul class="splide__list">
+                                        @foreach (var imageUrl in Model.typeRoomDTOGet.LstImage)
+                                        {
+                                            <li class="splide__slide">
+                                                <img src="@imageUrl" alt="Thumbnail">
+                                            </li>
+                                        }
+                                        @* <li class="splide__slide">
+                                            <img src="~/template/img/room-1.jpg" alt="Thumbnail 1">
+                                        </li>
+                                        <li class="splide__slide">
+                                            <img src="~/template/img/room-2.jpg" alt="Thumbnail 2">
+                                        </li>
+                                        <li class="splide__slide">
+                                            <img src="~/template/img/room-3.jpg" alt="Thumbnail 3">
+                                        </li>
+                                        <li class="splide__slide">
+                                            <img src="~/template/img/room-2.jpg" alt="Thumbnail 4">
+                                        </li>
+                                        <li class="splide__slide">
+                                            <img src="~/template/img/room-1.jpg" alt="Thumbnail 4">
+                                        </li> *@
+                                    </ul>
+                                </div>
+                            </div>
+                            <!-- Thumbnail Slider End-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <h6 class="section-title text-start text-primary text-uppercase">Thông Tin Phòng</h6>
+                <h1 class="mb-4">Phòng <span class="text-primary text-uppercase">@Model.typeRoomDTOGet.TypeName</span></h1>
+                <p class="mb-4">@Model.typeRoomDTOGet.Description</p>
+                <div class="row g-3 pb-4">
+                    <div class="col-sm-12 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-money-bill fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1">@Model.typeRoomDTOGet.PriceString VNĐ</h2>
+                                <p class="mb-0">Mỗi Đêm</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-bed fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1">@Model.typeRoomDTOGet.NumberOfBed</h2>
+                                <p class="mb-0">Giường</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-male fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1">@Model.typeRoomDTOGet.NumberOfAdult</h2>
+                                <p class="mb-0">Người Lớn</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-child fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1">@Model.typeRoomDTOGet.NumberOfChild</h2>
+                                <p class="mb-0">Trẻ Em</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-3 pb-4">
+                    <div class="text-center wow fadeInUp col-12" data-wow-delay="0.1s">
+                        <h6 class="section-title text-center text-primary text-uppercase">Dịch Vụ Tặng Kèm</h6>
+                    </div>
+                    @foreach (var serviceDTO in Model.typeRoomDTOGet.LstServiceObject)
+                    {
+                        <div class="col-sm-4 wow fadeInUp" data-wow-delay="0.1s">
+                            <div class="border rounded p-1">
+                                <div class="border rounded text-center p-4">
+                                    <i class="fa fa-star fa-2x text-primary mb-2"></i>
+                                    <p class="mb-1">@serviceDTO.ServiceName</p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <a class="btn btn-primary py-3 px-5 mt-2" asp-page="Booking" asp-route-id="@Model.typeRoomDTOGet.TypeId">Đặt Phòng Ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Room Detail -->
+<!-- Carousel Start -->
+<div class="container-fluid p-0 mb-5">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            @{
+                var isFirstItem = true;
+            }
+
+            @foreach (var serviceDTO in Model.typeRoomDTOGet.LstServiceObject)
+            {
+                <div class="carousel-item @(isFirstItem ? "active" : "")">
+                    <img class="w-100" src="@serviceDTO.ServiceImageUrls[0]" alt="Image">
+                    <div class="carousel-caption d-flex flex-column align-items-center justify-content-center" style="background:rgba(15, 23, 43, .3)">
+                        <div class="p-3" style="max-width: 700px;">
+                            <h6 class="section-title text-white text-uppercase mb-3 animated slideInDown">@serviceDTO.ServiceName</h6>
+                            <h1 class="display-3 text-white mb-4 animated slideInDown">@serviceDTO.Description</h1>
+                        </div>
+                    </div>
+                </div>
+                isFirstItem = false;
+            }
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+<!-- Carousel End -->
+
+@section Scripts{
+    
+    
+    <script src="https://cdn.jsdelivr.net/npm/@@splidejs/splide@3.6.9/dist/js/splide.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Set both sliders to 100% width dynamically
+            document.getElementById('primary_slider').style.width = '100%';
+            document.getElementById('thumbnail_slider').style.width = '100%';
+
+            // Adjust primary slider height based on the aspect ratio
+            function adjustPrimarySliderHeight() {
+                const primarySlider = document.getElementById('primary_slider');
+                const sliderWidth = primarySlider.offsetWidth;
+                const aspectRatio = 0.5; // Adjust this as needed
+                primarySlider.style.height = `${sliderWidth * aspectRatio}px`;
+            }
+
+            // Call once to set the initial height
+            adjustPrimarySliderHeight();
+
+            // Adjust on window resize for responsiveness
+            window.addEventListener('resize', adjustPrimarySliderHeight);
+
+            // Initialize primary slider
+            var primarySlider = new Splide('#primary_slider', {
+                type: 'fade',
+                pagination: false,
+                arrows: false,
+                cover: true,
+            }).mount();
+
+            // Initialize thumbnail slider
+            var thumbnailSlider = new Splide('#thumbnail_slider', {
+                fixedWidth: 100, // Adjust based on preference
+                fixedHeight: 64,
+                isNavigation: true,
+                gap: 10,
+                focus: 'center',
+                pagination: false,
+                cover: true,
+                breakpoints: {
+                    600: {
+                        fixedWidth: 66,
+                        fixedHeight: 40,
+                    },
+                },
+            }).mount();
+
+            // Sync both sliders
+            primarySlider.sync(thumbnailSlider).mount();
+        });
+    </script>
+}
