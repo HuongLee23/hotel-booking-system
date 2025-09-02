@@ -1,0 +1,229 @@
+﻿@page
+@model Bookings_Hotel.Pages.PaymentModel
+@{
+    ViewData["Title"] = "Payment";
+}
+
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Thanh Toán</h6>
+            <h1 class="mb-5"><img src="~/template/img/VietinbankLogo.png" width="200" alt=""></h1>
+        </div>
+        <div class="row g-5 mb-5">
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-12 text-center">
+                        <img id="qrImage" class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s"
+                             src="" alt="QR Code">
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-flex align-items-center">
+                <div class="wow fadeInUp" data-wow-delay="0.2s">
+                    <form>
+                        @Html.AntiForgeryToken()
+                        <div class="row g-3">
+                            <div class="col-md-12 d-flex justify-content-center">
+                                <span class="section-title text-center text-primary text-uppercase" id="alert-status-payment">Thời gian còn lại: <b id="count-down-time"></b></span>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="name" value="@Model.paymentDTO.BankName" disabled>
+                                    <label for="name">Ngân Hàng</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating input-group">
+                                    <input type="text" class="form-control" id="accountNumber"
+                                           value="@Model.paymentDTO.AccountNumber" disabled>
+                                    <label for="accountNumber">Số Tài Khoản</label>
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating">
+                                    <input type="text" class="form-control" id="money" value="@Model.paymentDTO.MoneyString VNĐ" disabled>
+                                    <label for="money">Số Tiền</label>
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-floating input-group">
+                                    <input type="text" class="form-control" id="accountNumber"
+                                           value="@Model.paymentDTO.CurrencyCode" disabled>
+                                    <label for="accountNumber">Nội Dung Chuyển Khoản</label>
+                                    <button class="btn btn-outline-secondary" type="button">
+                                        <i class="fa-regular fa-copy"></i>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                    <small class="text-center text-primary">* Hệ sẽ kiểm tra giao dịch của bạn sau 5-10s. Nếu hệ thống không kiểm tra giao dịch, hãy ấn nút Kiểm tra</small>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100 py-3" type="button" id="check-btn">Kiểm Tra</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script>
+        $(document).ready(function () {
+            //Genderate QR Code
+            $('#qrImage').attr('src', `https://img.vietqr.io/image/@Model.paymentDTO.BankName-@Model.paymentDTO.AccountNumber-compact2.png?amount=@Model.paymentDTO.Money&addInfo=@Model.paymentDTO.CurrencyCode&accountName=@Model.paymentDTO.AccountName`);
+
+            handbleCheckPayment();
+            autoCheckPayment();
+            startCountdown();
+        });
+        function startCountdown() {
+            // Khởi tạo thời gian từ Model
+            var ot = new Date('@Model.paymentDTO.OrderTime');
+
+            // Thời gian hết hạn (sau 1 phút kể từ ot)
+            var expirationTime = new Date(ot.getTime() + 1 * 60 * 1000); // Thêm 1 phút
+            var countdownInterval = setInterval(function () {
+                // Tính toán thời gian còn lại
+                var now = new Date();
+                var timeRemaining = expirationTime - now;
+
+                // Nếu thời gian còn lại <= 0, dừng đếm ngược và thông báo "time out"
+                if (timeRemaining <= 0) {
+                    clearInterval(countdownInterval);
+                    Swal.fire({
+                        icon: 'fail',
+                        title: 'Hết Thời Gian Thanh Toán',
+                        text: 'Đơn Hàng Của bạn đã bị hủy. Vui Lòng Đặt lại Phòng!',
+                        confirmButtonText: 'Trang Chủ',
+                        allowOutsideClick: false, // Ngăn người dùng đóng cửa sổ khi bấm ra ngoài
+                        allowEscapeKey: false,    // Ngăn người dùng đóng cửa sổ bằng phím Esc
+                        allowEnterKey: false      // Ngăn đóng cửa sổ khi nhấn Enter
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            window.location.href = '/'; // Chuyển hướng đến trang chủ
+                        }
+                    });
+
+                    $.ajax({
+                        url: '/Booking?handler=BatchUpdateOrderStatus',
+                        type: 'POST',
+                        headers: {
+                            'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                        },
+                        beforeSend: function () { },
+                        success: function (response) {
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                } else {
+                    // Chuyển đổi thời gian còn lại thành phút và giây
+                    var totalSeconds = Math.floor(timeRemaining / 1000);
+                    var minutes = Math.floor(totalSeconds / 60);
+                    var seconds = totalSeconds % 60;
+
+                    // Hiển thị thời gian dưới dạng "phút : giây"
+                    $('#count-down-time').text(`${minutes} phút ${seconds} giây`);
+                }
+            }, 1000); // Cập nhật mỗi giây
+        }
+        function autoCheckPayment() {
+            // Lưu trữ ID của setInterval để có thể dừng vòng lặp sau này
+            const intervalId = setInterval(function () {
+                checkPayment(function (isPaymentSuccessful) {
+                    if (isPaymentSuccessful) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thanh Toán Thành Công',
+                            text: 'Cảm ơn sự ủng hộ của bạn!',
+                            confirmButtonText: 'Trang Chủ',
+                            allowOutsideClick: false, // Ngăn người dùng đóng cửa sổ khi bấm ra ngoài
+                            allowEscapeKey: false,    // Ngăn người dùng đóng cửa sổ bằng phím Esc
+                            allowEnterKey: false      // Ngăn đóng cửa sổ khi nhấn Enter
+                        }).then((result) => {
+                            if (result.isConfirmed) {
+                                window.location.href = '/'; // Chuyển hướng đến trang chủ
+                            }
+                        });
+                        $('#alert-status-payment').text("Đặt hàng thành công");
+                        // Dừng vòng lặp setInterval
+                        clearInterval(intervalId);
+                    }
+                });
+            }, 5000); // 5000 ms = 5 giây
+        }
+
+        function handbleCheckPayment() {
+            $('#check-btn').click(function () {
+                // Hiển thị thông báo xử lý
+                Swal.fire({
+                    title: 'Đang Xử Lý',
+                    text: 'Vui Lòng Đợi Ít Phút Trong Lúc Chúng Tôi Kiểm Tra...',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    willOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                // Gọi checkPayment với callback để xử lý kết quả
+                checkPayment(function (isPaymentSuccessful) {
+                    if (isPaymentSuccessful) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Thanh Toán Thành Công',
+                            text: 'Cảm ơn sự ủng hộ của bạn!'
+                        });
+                        $('#alert-status-payment').text("Đặt hàng thành công");
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Thanh Toán Thất Bại',
+                            text: 'Hãy Kiểm Tra Lại Số Tiền Chuyển Khoản Và Nội Dung Chuyển Khoản. Nếu Gặp Vấn Đề Vui Lòng Liên Hệ Bộ Phận Hỗ Trợ!'
+                        });
+                    }
+                });
+            });
+        }
+
+        function checkPayment(callback) {
+            $.ajax({
+                url: '/Payment?handler=CheckPayment',
+                type: 'POST',
+                data: {
+                    orderID: @Model.paymentDTO.OrderID
+                },
+                headers: {
+                    'RequestVerificationToken': $('input[name="__RequestVerificationToken"]').val()
+                },
+                beforeSend: function () { },
+                success: function (response) {
+                    if (response.success) {
+                        callback(true);  // Gọi callback với kết quả thành công
+                    } else {
+                        callback(false); // Gọi callback với kết quả thất bại
+                    }
+                },
+                error: function (xhr, status, error) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Máy Chủ Gặp Lỗi',
+                        text: 'Có lỗi trong quá trình xử lý, vui lòng thử lại sau!'
+                    });
+                    console.log(xhr.responseText);
+                    callback(false);
+                }
+            });
+        }
+
+    </script>
+}

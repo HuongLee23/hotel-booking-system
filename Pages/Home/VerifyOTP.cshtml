@@ -1,0 +1,17 @@
+﻿@page
+@model Bookings_Hotel.Pages.Home.VerifyOTPModel
+@{
+    ViewData["Title"] = "Verify OTP";
+    Layout = "~/Pages/Shared/Layout_Login.cshtml";
+}
+
+<h2>Xác thực OTP</h2>
+
+<form method="post">
+    <div>
+        <label for="otp">Nhập OTP:</label>
+        <input type="number" id="otp" name="otp" />
+        <span asp-validation-for="OTP"></span>
+    </div>
+    <button type="submit">Xác thực</button>
+</form>

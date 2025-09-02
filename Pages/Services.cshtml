@@ -1,0 +1,33 @@
+﻿@page
+@model Bookings_Hotel.Pages.ServicesModel
+@{
+    ViewData["Title"] = "Services";
+}
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Dịch vụ của chúng tôi</h6>
+            <h1 class="mb-5">Khám phá dịch vụ <span class="text-primary text-uppercase">tốt nhất</span></h1>
+        </div>
+        <div class="row g-4">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <a class="service-item rounded" href="#">
+                        <img src="@service.ServiceImages.FirstOrDefault()?.ImageUrl" alt="Service" class="img-fluid rounded w-100 h-100">
+                        <h5 class="mb-3">@service.ServiceName</h5>
+                        <p class="text-body mb-0">
+                            @(string.IsNullOrEmpty(service.Description)
+                                ? "Không có mô tả nào"
+                                : (service.Description.Length > 50
+                                ? service.Description.Substring(0, 50) + "..."
+                                : service.Description))
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Service End -->

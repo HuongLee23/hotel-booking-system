@@ -1,0 +1,446 @@
+﻿@page
+@model Bookings_Hotel.Pages.IndexModel
+@{
+    ViewData["Title"] = "Home page";
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<!-- Search Room Start -->
+<div class="container-fluid booking pb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="bg-white shadow" style="padding: 35px;">
+            <form action="/Room">
+                <div class="row g-2">
+                    <div class="col-md-10">
+                        <div class="row g-2">
+                            <div class="col-md-2">
+                                <div class="date" id="date1" data-target-input="nearest">
+                                    <input type="date" id="checkin" name="checkin"
+                                           class="form-control datetimepicker-input"
+                                           placeholder="Check in" required />
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="date" id="date2" data-target-input="nearest">
+                                    <input type="date" id="checkout" name="checkout"
+                                           class="form-control datetimepicker-input"
+                                           placeholder="Check out" required />
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <input type="number" name="AdultCount"
+                                       class="form-control" placeholder="Số lượng người lớn" />
+                            </div>
+                            <div class="col-md-2">
+                                <input type="number" name="ChildCount"
+                                       class="form-control" placeholder="Số lượng trẻ em" />
+                            </div>
+                            <div class="col-md-3">
+                                <div class="dropdown h-100">
+                                    <button class="form-select text-start h-100 w-100" type="button"
+                                            id="dropdownMenuButton" data-bs-toggle="dropdown"
+                                            aria-expanded="false">
+                                        Loại phòng
+                                    </button>
+                                    <ul class="dropdown-menu w-100 p-2" aria-labelledby="dropdownMenuButton"
+                                        style="z-index: 1000;">
+                                        @foreach (var typeRoom in Model.TypeRooms)
+                                        {
+                                            <li class="my-2">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox"
+                                                           name="SelectedTypeRooms" value="@typeRoom.TypeName"
+                                                           id="@typeRoom.TypeId">
+                                                    <label class="form-check-label" for="checkbox1">
+                                                        @typeRoom.TypeName
+                                                    </label>
+                                                </div>
+                                            </li>
+                                        }
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary w-100">Tìm kiếm</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Search Room End-->
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6">
+                <h6 class="section-title text-start text-primary text-uppercase">Vể chúng tôi</h6>
+                <h1 class="mb-4">Chào mừng bạn đến với<span class="text-primary text-uppercase">Hotelier</span></h1>
+                <p class="mb-4">
+                    Hotelier – nơi đẳng cấp và tinh tế hội tụ. Tận hưởng không gian sang trọng, dịch vụ chu đáo và trải nghiệm hoàn hảo cho kỳ nghỉ của bạn.
+                </p>
+                <div class="row g-3 pb-4">
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.1s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-hotel fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">@Model.NumberRoom</h2>
+                                <p class="mb-0">Phòng</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.3s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-users-cog fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">@Model.NumberService</h2>
+                                <p class="mb-0">Dịch vụ</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-4 wow fadeIn" data-wow-delay="0.5s">
+                        <div class="border rounded p-1">
+                            <div class="border rounded text-center p-4">
+                                <i class="fa fa-users fa-2x text-primary mb-2"></i>
+                                <h2 class="mb-1" data-toggle="counter-up">@Model.NumberCustomer</h2>
+                                <p class="mb-0">Khách hàng</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <a class="btn btn-primary py-3 px-5 mt-2" href="/Room">Khám phá ngay</a>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6 text-end">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.1s" src="~/template/img/about-1.jpg" style="margin-top: 25%;">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid rounded w-100 wow zoomIn" data-wow-delay="0.3s" src="~/template/img/about-2.jpg">
+                    </div>
+                    <div class="col-6 text-end">
+                        <img class="img-fluid rounded w-50 wow zoomIn" data-wow-delay="0.5s" src="~/template/img/about-3.jpg">
+                    </div>
+                    <div class="col-6 text-start">
+                        <img class="img-fluid rounded w-75 wow zoomIn" data-wow-delay="0.7s" src="~/template/img/about-4.jpg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Room Start -->
+<!-- Room được đánh giá tốt nhất -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Khách sạn của chúng tôi</h6>
+            <h1 class="mb-5">Top 10 phòng được đánh giá <span class="text-primary text-uppercase">tốt nhất</span></h1>
+        </div>
+        <!-- List Room Start -->
+        <div>
+            @await Html.PartialAsync("PartialViews/_RoomsPartialView", Model.TypeRoomsTopRate)
+        </div>
+        <!-- List Room End -->
+    </div>
+</div>
+<!-- Room được lựa chọn nhiều nhất -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Khách sạn của chúng tôi</h6>
+            <h1 class="mb-5">Top 10 phòng được lựa chọn <span class="text-primary text-uppercase">nhiều nhất</span></h1>
+        </div>
+        <!-- List Room Start -->
+        <div>
+            @await Html.PartialAsync("PartialViews/_RoomsPartialView", Model.TypeRoomsTopBooking)
+        </div>
+        <!-- List Room End -->
+    </div>
+</div>
+<!-- Room End -->
+<!-- Video Start -->
+<div class="container-xxl py-5 px-0 wow zoomIn" data-wow-delay="0.1s">
+    <div class="row g-0">
+        <div class="col-md-6 bg-dark d-flex align-items-center">
+            <div class="p-5">
+                <h6 class="section-title text-start text-white text-uppercase mb-3">Luxury Living</h6>
+                <h1 class="text-white mb-4">Khám phá khách sạn sang trọng</h1>
+                <p class="text-white mb-4">Chào mừng bạn đến với Hotelier – nơi đẳng cấp và tinh tế hội tụ. Tận hưởng không gian sang trọng, dịch vụ chu đáo và trải nghiệm hoàn hảo cho kỳ nghỉ của bạn.</p>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="video">
+                <button type="button" class="btn-play" data-bs-toggle="modal" data-src="https://www.youtube.com/embed/9I2xta0ahIs?si=4cMLtiSB1e5DUx8s" data-bs-target="#videoModal">
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content rounded-0">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Youtube Video</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 16:9 aspect ratio -->
+                <div class="ratio ratio-16x9">
+                    <iframe class="embed-responsive-item" src="" id="video" allowfullscreen allowscriptaccess="always"
+                            allow="autoplay"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Video Start -->
+<!-- Service Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="text-center wow fadeInUp" data-wow-delay="0.1s">
+            <h6 class="section-title text-center text-primary text-uppercase">Dịch vụ của chúng tôi</h6>
+            <h1 class="mb-5">Khám phá dịch vụ <span class="text-primary text-uppercase">tốt nhất</span></h1>
+        </div>
+        <div class="row g-4">
+            @foreach (var service in Model.Services)
+            {
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                    <a class="service-item rounded" href="#">
+                        <img src="@service.ServiceImages.FirstOrDefault()?.ImageUrl" alt="Service" class="img-fluid rounded w-100 h-100">
+                        <h5 class="mb-3">@service.ServiceName</h5>
+                        <p class="text-body mb-0">
+                            @(string.IsNullOrEmpty(service.Description)
+                                ? "Không có mô tả nào"
+                                : (service.Description.Length > 50
+                                ? service.Description.Substring(0, 50) + "..."
+                                : service.Description))
+                        </p>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Service End -->
+<!-- Testimonial Start -->
+<div class="container-xxl testimonial my-5 py-5 bg-dark wow zoomIn" data-wow-delay="0.1s">
+    <div class="container">
+        <div class="owl-carousel testimonial-carousel py-5">
+            @foreach (var feedback in Model.Feedbacks)
+            {
+                <div class="testimonial-item position-relative bg-white rounded overflow-hidden">
+                    <p>
+                        @(string.IsNullOrEmpty(feedback.Comment)
+                            ? "Không có mô tả nào"
+                            : (feedback.Comment.Length > 100
+                            ? feedback.Comment.Substring(0, 100) + "..."
+                            : feedback.Comment))
+                    </p>
+                    <div class="d-flex align-items-center">
+                        <img class="img-fluid flex-shrink-0 rounded" src="@feedback.FeedbackImages.FirstOrDefault()" style="width: 45px; height: 45px;">
+                        <div class="ps-3">
+                            <h6 class="fw-bold mb-1">@feedback.Account.FullName</h6>
+                            <div class="ps-2">
+                                @for (int i = 1; i <= 5; i++)
+                                {
+                                    if (i <= feedback.Rating)
+                                    {
+                                        <i class="fa fa-star text-primary"></i>
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-star text-secondary"></i>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <i class="fa fa-quote-right fa-3x text-primary position-absolute end-0 bottom-0 me-4 mb-n1"></i>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+<!-- Scripts Start-->
+@section Scripts {
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var ratings = document.querySelectorAll('.rating');
+
+            ratings.forEach(function (ratingElement) {
+                var rating = ratingElement.getAttribute('data-rating');
+
+                if (!rating) {
+                    rating = 0;
+                } else {
+                    rating = parseFloat(rating);
+                }
+
+                for (var i = 0; i < 5; i++) {
+                    var star = document.createElement('small');
+                    star.classList.add('fa', 'fa-star');
+
+                    if (i < Math.floor(rating)) {
+                        star.style.color = 'gold';
+                    } else if (i < rating) {
+                        star.style.color = 'gold';
+                        star.classList.add('fa-star-half-alt');
+                    } else {
+                        star.style.color = 'lightgray';
+                    }
+                    ratingElement.appendChild(star);
+                }
+            });
+        });
+
+        $(document).ready(function () {
+            initializeDateDefaults();
+            setupDateValidation();
+            setupGuestCountValidation();
+        });
+
+        function initializeDateDefaults() {
+            const today = new Date();
+
+            // Set default check-in date (tomorrow)
+            const checkin = new Date();
+            checkin.setDate(today.getDate() + 1);
+            const checkinDateString = checkin.toISOString().split('T')[0];
+            $('#checkin').val(checkinDateString);
+
+            // Set default check-out date (day after tomorrow)
+            const checkout = new Date();
+            checkout.setDate(today.getDate() + 2);
+            const checkoutDateString = checkout.toISOString().split('T')[0];
+            $('#checkout').val(checkoutDateString);
+
+            // Set min attribute for both inputs
+            const todayString = today.toISOString().split('T')[0];
+            $('#checkin').attr('min', todayString);
+            $('#checkout').attr('min', todayString);
+        }
+
+        function setupDateValidation() {
+            // Validate check-in date
+            $('#checkin').on('change', function () {
+                const checkinDate = new Date($(this).val());
+                const checkoutDate = new Date($('#checkout').val());
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                if (checkinDate < today) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ngày không hợp lệ',
+                        text: 'Ngày check-in không thể trước ngày hôm nay!'
+                    });
+                    // Reset to tomorrow
+                    const tomorrow = new Date();
+                    tomorrow.setDate(today.getDate() + 1);
+                    $(this).val(tomorrow.toISOString().split('T')[0]);
+                } else if ($('#checkout').val() && checkoutDate <= checkinDate) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ngày không hợp lệ',
+                        text: 'Ngày check-in phải trước ngày check-out!'
+                    });
+                    // Reset checkout to day after new checkin
+                    const newCheckout = new Date(checkinDate);
+                    newCheckout.setDate(checkinDate.getDate() + 1);
+                    $('#checkout').val(newCheckout.toISOString().split('T')[0]);
+                }
+
+                // Update minimum date for checkout
+                const minCheckout = new Date(checkinDate);
+                minCheckout.setDate(checkinDate.getDate() + 1);
+                $('#checkout').attr('min', minCheckout.toISOString().split('T')[0]);
+            });
+
+            // Validate check-out date
+            $('#checkout').on('change', function () {
+                const checkinDate = new Date($('#checkin').val());
+                const checkoutDate = new Date($(this).val());
+
+                if (checkoutDate <= checkinDate) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Ngày không hợp lệ',
+                        text: 'Ngày check-out phải sau ngày check-in!'
+                    });
+                    // Reset to day after checkin
+                    const newCheckout = new Date(checkinDate);
+                    newCheckout.setDate(checkinDate.getDate() + 1);
+                    $(this).val(newCheckout.toISOString().split('T')[0]);
+                }
+            });
+
+            // Form submission validation
+            $('form').on('submit', function (e) {
+                const checkinDate = new Date($('#checkin').val());
+                const checkoutDate = new Date($('#checkout').val());
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+
+                if (checkinDate < today || checkoutDate <= checkinDate) {
+                    e.preventDefault();
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Lỗi ngày tháng',
+                        text: 'Vui lòng kiểm tra lại ngày check-in và check-out!'
+                    });
+                    return false;
+                }
+            });
+        }
+
+        function setupGuestCountValidation() {
+            // Set initial attributes for guest count inputs
+            $('input[name="AdultCount"], input[name="ChildCount"]').attr({
+                'min': '0',
+                'step': '1'
+            });
+
+            // Validate adult count
+            $('input[name="AdultCount"]').on('input', function () {
+                const value = parseInt($(this).val());
+                if (value <= 0 || !Number.isInteger(value)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Số lượng không hợp lệ',
+                        text: 'Số lượng người lớn phải lớn hơn 0!'
+                    });
+                    $(this).val(''); // Clear invalid input
+                }
+            });
+
+            // Validate child count
+            $('input[name="ChildCount"]').on('input', function () {
+                const value = parseInt($(this).val());
+                if (value < 0 || !Number.isInteger(value)) {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Số lượng không hợp lệ',
+                        text: 'Số lượng trẻ em phải lớn hơn hoặc bằng 0!'
+                    });
+                    $(this).val(''); // Clear invalid input
+                }
+            });
+
+            // Prevent non-numeric input
+            $('input[name="AdultCount"], input[name="ChildCount"]').on('keypress', function (e) {
+                if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+                    return false;
+                }
+            });
+        }
+    </script>
+}
+<!-- Scripts End-->
